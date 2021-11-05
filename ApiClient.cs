@@ -91,7 +91,8 @@ namespace CurseForge.APIClient
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _httpClient?.Dispose();
+            _httpClient = null;
         }
     }
 }
