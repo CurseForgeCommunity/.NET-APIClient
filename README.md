@@ -1,5 +1,11 @@
 # CurseForge API Client
 
+![Nuget](https://img.shields.io/nuget/v/CurseForge.APIClient?style=for-the-badge)
+[![GitHub issues](https://img.shields.io/github/issues/itssimple/CurseForge.APIClient?style=for-the-badge)](https://github.com/itssimple/CurseForge.APIClient/issues)
+[![GitHub stars](https://img.shields.io/github/stars/itssimple/CurseForge.APIClient?style=for-the-badge)](https://github.com/itssimple/CurseForge.APIClient/stargazers)
+[![GitHub license](https://img.shields.io/github/license/itssimple/CurseForge.APIClient?style=for-the-badge)](https://github.com/itssimple/CurseForge.APIClient)
+
+
 This project aims to be a fully functional .NET client that allows you to use the CurseForge API,
 
 All you need is an API key, your partner ID and a contact email to get started.
