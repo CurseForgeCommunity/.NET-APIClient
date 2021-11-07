@@ -1,6 +1,6 @@
 # CurseForge API Client
 
-![Nuget](https://img.shields.io/nuget/v/CurseForge.APIClient?style=for-the-badge)
+[![Nuget](https://img.shields.io/nuget/v/CurseForge.APIClient?style=for-the-badge)](https://www.nuget.org/packages/CurseForge.APIClient/)
 [![GitHub issues](https://img.shields.io/github/issues/itssimple/CurseForge.APIClient?style=for-the-badge)](https://github.com/itssimple/CurseForge.APIClient/issues)
 [![GitHub stars](https://img.shields.io/github/stars/itssimple/CurseForge.APIClient?style=for-the-badge)](https://github.com/itssimple/CurseForge.APIClient/stargazers)
 [![GitHub license](https://img.shields.io/github/license/itssimple/CurseForge.APIClient?style=for-the-badge)](https://github.com/itssimple/CurseForge.APIClient)
