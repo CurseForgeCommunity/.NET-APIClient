@@ -1,9 +1,9 @@
 # CurseForge API Client
 
 [![Nuget](https://img.shields.io/nuget/v/CurseForge.APIClient?style=for-the-badge)](https://www.nuget.org/packages/CurseForge.APIClient/)
-[![GitHub issues](https://img.shields.io/github/issues/CurseForgeCommunity/CurseForge.APIClient?style=for-the-badge)](https://github.com/CurseForgeCommunity/CurseForge.APIClient/issues)
-[![GitHub stars](https://img.shields.io/github/stars/CurseForgeCommunity/CurseForge.APIClient?style=for-the-badge)](https://github.com/CurseForgeCommunity/CurseForge.APIClient/stargazers)
-[![GitHub license](https://img.shields.io/github/license/CurseForgeCommunity/CurseForge.APIClient?style=for-the-badge)](https://github.com/CurseForgeCommunity/CurseForge.APIClient)
+[![GitHub issues](https://img.shields.io/github/issues/CurseForgeCommunity/.NET-APIClient?style=for-the-badge)](https://github.com/CurseForgeCommunity/.NET-APIClient/issues)
+[![GitHub stars](https://img.shields.io/github/stars/CurseForgeCommunity/.NET-APIClient?style=for-the-badge)](https://github.com/CurseForgeCommunity/.NET-APIClient/stargazers)
+[![GitHub license](https://img.shields.io/github/license/CurseForgeCommunity/.NET-APIClient?style=for-the-badge)](https://github.com/CurseForgeCommunity/.NET-APIClient)
 
 
 This project aims to be a fully functional .NET client that allows you to use the CurseForge API,
