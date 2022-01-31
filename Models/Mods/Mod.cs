@@ -22,7 +22,7 @@ namespace CurseForge.APIClient.Models.Mods
         public List<ModAsset> Screenshots { get; set; } = new List<ModAsset>();
         public int MainFileId { get; set; }
         public List<File> LatestFiles { get; set; } = new List<File>();
-        public List<FileIndex> LatestFileIndexes { get; set; } = new List<FileIndex>();
+        public List<FileIndex> LatestFilesIndexes { get; set; } = new List<FileIndex>();
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateModified { get; set; }
         public DateTimeOffset DateReleased { get; set; }
