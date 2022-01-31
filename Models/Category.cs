@@ -10,7 +10,7 @@ namespace CurseForge.APIClient.Models
         public string Slug { get; set; }
         public string Url { get; set; }
         public string IconUrl { get; set; }
-        public DateTimeOffset DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
         public bool? IsClass { get; set; }
         public int? ClassId { get; set; }
         public int? ParentCategoryId { get; set; }
