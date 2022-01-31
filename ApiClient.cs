@@ -38,6 +38,7 @@ namespace CurseForge.APIClient
 
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", $"CurseForge Api Client (PartnerId: {_partnerId}) (+{_contactEmail})");
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", _apiKey);
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
             }
         }
 
