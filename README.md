@@ -241,3 +241,31 @@ var modFile = await cfApiClient.GetFingerprintsFuzzyMatchesAsync(new GetFuzzyMat
     }
 });
 ```
+
+---
+
+### Minecraft
+
+#### Get Minecraft Versions
+
+This method allows you to fetch the Minecraft versions available to CurseForge
+
+`GetMinecraftVersions(bool sortDescending)`
+
+#### Get Specific Minecraft Version
+
+Get information about a specific Minecraft version
+
+`GetSpecificMinecraftVersionInfo(string gameVersion)`
+
+#### Get Minecraft ModLoaders
+
+Get all modloaders for Minecraft
+
+`GetMinecraftModloaders(string version, bool includeAll)`
+
+#### Get Specific Minecraft ModLoader
+
+Gets information about a specific modloader
+
+`GetSpecificMinecraftModloaderInfo(string modloaderName)`

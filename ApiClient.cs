@@ -83,7 +83,6 @@ namespace CurseForge.APIClient
         {
             if (!result.IsSuccessStatusCode)
             {
-                Console.WriteLine(JsonConvert.SerializeObject(result));
                 throw new Exception(await result.Content.ReadAsStringAsync());
             }
 
