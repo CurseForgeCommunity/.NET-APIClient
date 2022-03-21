@@ -7,12 +7,12 @@ namespace CurseForge.APIClient
     public partial class ApiClient
     {
         public async Task<GenericListResponse<Mod>> SearchModsAsync(int? gameId = null, int? classId = null, int? categoryId = null,
-            string gameVersion = null, string searchFilter = null, ModsSearchSortField? sortField = null, bool? sortOrder = null,
+            string gameVersion = null, string searchFilter = null, ModsSearchSortField? sortField = null, bool sortOrder = true,
             ModLoaderType? modLoaderType = null, int? gameVersionTypeId = null, int? index = null, int? pageSize = null)
         {
             return await GET<GenericListResponse<Mod>>("/v1/mods/search",
                 ("gameId", gameId), ("classId", classId), ("categoryId", categoryId), ("gameVersion", gameVersion), ("searchFilter", searchFilter),
-                ("sortField", sortField), ("sortOrder", sortOrder), ("modLoaderType", modLoaderType), ("gameVersionTypeId", gameVersionTypeId),
+                ("sortField", sortField), ("sortOrder", sortOrder ? "desc" : "asc"), ("modLoaderType", modLoaderType), ("gameVersionTypeId", gameVersionTypeId),
                 ("index", index), ("pageSize", pageSize));
         }
 
