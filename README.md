@@ -94,7 +94,7 @@ Get all mods that match the search criteria.
 SearchModsAsync(
     int? gameId = null, int? classId = null, int? categoryId = null,
     string gameVersion = null, string searchFilter = null,
-    ModsSearchSortField? sortField = null, bool? sortOrder = null,
+    ModsSearchSortField? sortField = null, ModsSearchSortOrder sortOrder = ModsSearchSortOrder.Descending,
     ModLoaderType? modLoaderType = null, int? gameVersionTypeId = null,
     int? index = null, int? pageSize = null
 )
