@@ -17,6 +17,7 @@ namespace CurseForge.APIClient.Models.Mods
         public bool IsFeatured { get; set; }
         public int PrimaryCategoryId { get; set; }
         public List<Category> Categories { get; set; } = new List<Category>();
+        public int? ClassId { get; set; }
         public List<ModAuthor> Authors { get; set; } = new List<ModAuthor>();
         public ModAsset Logo { get; set; }
         public List<ModAsset> Screenshots { get; set; } = new List<ModAsset>();
@@ -26,5 +27,9 @@ namespace CurseForge.APIClient.Models.Mods
         public DateTimeOffset DateCreated { get; set; }
         public DateTimeOffset DateModified { get; set; }
         public DateTimeOffset DateReleased { get; set; }
+        public bool? AllowModDistribution { get; set; }
+        public int GamePopularityRank { get; set; }
+        public bool IsAvailable { get; set; }
+        public int? ThumbsUpCount { get; set; }
     }
 }
