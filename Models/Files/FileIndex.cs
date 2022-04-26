@@ -8,7 +8,7 @@ namespace CurseForge.APIClient.Models.Files
         public int FileId { get; set; }
         public string Filename { get; set; }
         public FileReleaseType ReleaseType { get; set; }
-        public int? GameVversionTypeId { get; set; }
+        public int? GameVersionTypeId { get; set; }
         public ModLoaderType? ModLoader { get; set; }
     }
 }
