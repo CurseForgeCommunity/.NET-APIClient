@@ -6,7 +6,7 @@ namespace CurseForge.APIClient
 {
     public partial class ApiClient
     {
-        public async Task<GenericListResponse<Mod>> SearchModsAsync(int? gameId = null, int? classId = null, int? categoryId = null,
+        public async Task<GenericListResponse<Mod>> SearchModsAsync(int gameId, int? classId = null, int? categoryId = null,
             string gameVersion = null, string searchFilter = null, ModsSearchSortField? sortField = null, ModsSearchSortOrder sortOrder = ModsSearchSortOrder.Descending,
             ModLoaderType? modLoaderType = null, int? gameVersionTypeId = null, int? index = null, int? pageSize = null)
         {
