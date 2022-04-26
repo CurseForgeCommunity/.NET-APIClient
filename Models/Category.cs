@@ -14,5 +14,6 @@ namespace CurseForge.APIClient.Models
         public bool? IsClass { get; set; }
         public int? ClassId { get; set; }
         public int? ParentCategoryId { get; set; }
+        public int? DisplayIndex { get; set; }
     }
 }
