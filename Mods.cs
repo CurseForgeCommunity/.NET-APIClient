@@ -8,11 +8,11 @@ namespace CurseForge.APIClient
     {
         public async Task<GenericListResponse<Mod>> SearchModsAsync(int gameId, int? classId = null, int? categoryId = null,
             string gameVersion = null, string searchFilter = null, ModsSearchSortField? sortField = null, ModsSearchSortOrder sortOrder = ModsSearchSortOrder.Descending,
-            ModLoaderType? modLoaderType = null, int? gameVersionTypeId = null, int? index = null, int? pageSize = null)
+            ModLoaderType? modLoaderType = null, string slug = null, int? gameVersionTypeId = null, int? index = null, int? pageSize = null)
         {
             return await GET<GenericListResponse<Mod>>("/v1/mods/search",
                 ("gameId", gameId), ("classId", classId), ("categoryId", categoryId), ("gameVersion", gameVersion), ("searchFilter", searchFilter),
-                ("sortField", sortField), ("sortOrder", sortOrder == ModsSearchSortOrder.Descending ? "desc" : "asc"), ("modLoaderType", modLoaderType), ("gameVersionTypeId", gameVersionTypeId),
+                ("slug", slug), ("sortField", sortField), ("sortOrder", sortOrder == ModsSearchSortOrder.Descending ? "desc" : "asc"), ("modLoaderType", modLoaderType), ("gameVersionTypeId", gameVersionTypeId),
                 ("index", index), ("pageSize", pageSize));
         }
 

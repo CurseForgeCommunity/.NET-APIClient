@@ -6,7 +6,7 @@
     <Company />
     <Description>A .NET client for connecting to the CurseForge API</Description>
     <Copyright>2021-2022 © NoLifeKing85</Copyright>
-	  <Version>1.1.4</Version>
+	  <Version>1.2.0</Version>
   </PropertyGroup>
 
   <PropertyGroup>
