@@ -51,6 +51,15 @@ namespace CurseForge.APIClient
             InitHttpClientIfMissing();
         }
 
+        public ApiClient(string apiKey, string contactEmail)
+        {
+            _apiKey = apiKey;
+            _partnerId = -1;
+            _contactEmail = contactEmail;
+
+            InitHttpClientIfMissing();
+        }
+
         internal string GetQuerystring(params (string Key, object Value)[] queryParameters)
         {
             return queryParameters.Count(k => k.Value != null) > 0 ? "?" +
