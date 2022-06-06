@@ -5,7 +5,7 @@ namespace CurseForge.APIClient.Models.Mods
     public class GetFeaturedModsRequestBody
     {
         public int GameId { get; set; }
-        public List<long> ExcludedModIds {  get; set;} = new List<long>();
-        public int? GameVersionTypeId {  get; set; }
+        public List<int> ExcludedModIds { get; set; } = new List<int>();
+        public uint? GameVersionTypeId { get; set; }
     }
 }

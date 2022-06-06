@@ -5,9 +5,9 @@ namespace CurseForge.APIClient.Models.Minecraft
 {
     public class MinecraftModloaderInfo
     {
-        public int Id { get; set; }
-        public int GameVersionId { get; set; }
-        public int MinecraftGameVersionId { get; set; }
+        public uint Id { get; set; }
+        public uint GameVersionId { get; set; }
+        public uint MinecraftGameVersionId { get; set; }
         public string ForgeVersion { get; set; }
         public string Name { get; set; }
         public CoreModloaderType Type { get; set; }
@@ -23,12 +23,12 @@ namespace CurseForge.APIClient.Models.Minecraft
         public string LibrariesInstallLocation { get; set; }
         public string MinecraftVersion { get; set; }
         public string AdditionalFilesJson { get; set; }
-        public int ModloaderGameVersionId { get; set; }
-        public int ModloaderGameVersionTypeId { get; set; }
+        public uint ModloaderGameVersionId { get; set; }
+        public uint ModloaderGameVersionTypeId { get; set; }
         public CoreGameVersionStatus ModloaderGameVersionStatus { get; set; }
         public CoreGameVersionTypeStatus ModloaderGameVersionTypeStatus { get; set; }
-        public int MCGameVersionId { get; set; }
-        public int MCGameVersionTypeId { get; set; }
+        public uint MCGameVersionId { get; set; }
+        public uint MCGameVersionTypeId { get; set; }
         public CoreGameVersionStatus MCGameVersionStatus { get; set; }
         public CoreGameVersionTypeStatus MCGameVersionTypeStatus { get; set; }
         public string InstallProfileJson { get; set; }

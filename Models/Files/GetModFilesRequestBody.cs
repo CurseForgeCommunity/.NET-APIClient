@@ -4,6 +4,6 @@ namespace CurseForge.APIClient.Models.Files
 {
     public class GetModFilesRequestBody
     {
-        public List<long> FileIds { get; set; } = new List<long>();
+        public List<int> FileIds { get; set; } = new List<int>();
     }
 }

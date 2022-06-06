@@ -5,7 +5,7 @@ namespace CurseForge.APIClient.Models.Fingerprints
 {
     public class FingerprintMatch
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
         public File File { get; set; }
         public List<File> LatestFiles { get; set; } = new List<File>();
     }
