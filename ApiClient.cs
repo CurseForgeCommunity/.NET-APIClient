@@ -1,4 +1,5 @@
 ﻿using CurseForge.APIClient.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace CurseForge.APIClient
 {
     public partial class ApiClient : IDisposable
     {
-        private static HttpClient _httpClient;
+        private IServiceCollection _serviceCollection;
+        private IServiceProvider _serviceProvider;
         private const string curseForgeApiBaseUrl = "https://api.curseforge.com";
 
         private readonly string _apiKey;
@@ -29,17 +31,26 @@ namespace CurseForge.APIClient
                 throw new MissingContactEmailException("You need to provide an email to be contacted on, if needed.");
             }
 
-            if (_httpClient == null)
+            BootstrapDependencyInjection();
+        }
+
+        private void BootstrapDependencyInjection()
+        {
+            if (_serviceCollection == null)
             {
-                _httpClient = new HttpClient
-                {
-                    BaseAddress = new Uri(curseForgeApiBaseUrl),
-                };
+                _serviceCollection = new ServiceCollection();
+            }
+
+            _serviceCollection.AddHttpClient("curseForgeClient", _httpClient =>
+            {
+                _httpClient.BaseAddress = new Uri(curseForgeApiBaseUrl);
 
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", $"CurseForge Api Client (PartnerId: {_partnerId}) (+{_contactEmail})");
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", _apiKey);
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
-            }
+            });
+
+            _serviceProvider = _serviceCollection.BuildServiceProvider();
         }
 
         public ApiClient(string apiKey, long partnerId, string contactEmail)
@@ -71,6 +82,8 @@ namespace CurseForge.APIClient
 
         internal async Task<T> GET<T>(string endpoint, params (string Key, object Value)[] queryParameters)
         {
+            var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
+            var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
             return await HandleResponseMessage<T>(
                 await _httpClient.GetAsync(
                     endpoint + GetQuerystring(queryParameters)
@@ -80,6 +93,8 @@ namespace CurseForge.APIClient
 
         internal async Task<T> POST<T>(string endpoint, object body)
         {
+            var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
+            var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
             return await HandleResponseMessage<T>(
                 await _httpClient.PostAsync(
                     endpoint,
@@ -100,8 +115,7 @@ namespace CurseForge.APIClient
 
         public void Dispose()
         {
-            _httpClient?.Dispose();
-            _httpClient = null;
+            // Empty because of legacy
         }
     }
 }
