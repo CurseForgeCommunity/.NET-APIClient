@@ -10,14 +10,14 @@ namespace CurseForge.APIClient
 {
     public partial class ApiClient : IDisposable
     {
-        private static HttpClient _httpClient;
+        private HttpClient _httpClient;
         private const string curseForgeApiBaseUrl = "https://api.curseforge.com";
 
         private readonly string _apiKey;
         private readonly long _partnerId;
         private readonly string _contactEmail;
 
-        private void InitHttpClientIfMissing()
+        private void InitHttpClient()
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
             {
@@ -48,7 +48,7 @@ namespace CurseForge.APIClient
             _partnerId = partnerId;
             _contactEmail = contactEmail;
 
-            InitHttpClientIfMissing();
+            InitHttpClient();
         }
 
         public ApiClient(string apiKey, string contactEmail)
@@ -57,7 +57,7 @@ namespace CurseForge.APIClient
             _partnerId = -1;
             _contactEmail = contactEmail;
 
-            InitHttpClientIfMissing();
+            InitHttpClient();
         }
 
         internal string GetQuerystring(params (string Key, object Value)[] queryParameters)
@@ -101,7 +101,6 @@ namespace CurseForge.APIClient
         public void Dispose()
         {
             _httpClient?.Dispose();
-            _httpClient = null;
         }
     }
 }
