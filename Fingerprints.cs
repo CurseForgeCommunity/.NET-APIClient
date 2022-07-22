@@ -20,12 +20,22 @@ namespace CurseForge.APIClient
 
         public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintMatchesForFileAsync(string file)
         {
-            var fingerprint = MurmurHash2.Hash(MurmurHash2.NormalizeByteArray(File.ReadAllBytes(file)));
+            var fingerprint = GetFingerprintFromFile(file);
 
             return await POST<GenericResponse<FingerprintMatchesResult>>("/v1/fingerprints", new GetFingerprintMatchesRequestBody
             {
                 Fingerprints = new List<long> { fingerprint }
             });
+        }
+
+        public long GetFingerprintFromFile(string file)
+        {
+            return GetFingerprintFromBytes(File.ReadAllBytes(file));
+        }
+
+        public long GetFingerprintFromBytes(byte[] fileBytes)
+        {
+            return MurmurHash2.Hash(MurmurHash2.NormalizeByteArray(fileBytes));
         }
     }
 }
