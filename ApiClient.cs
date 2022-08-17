@@ -111,7 +111,6 @@ namespace CurseForge.APIClient
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
 
-            Console.WriteLine(_httpClient.DefaultRequestHeaders.UserAgent);
             return await HandleResponseMessage<T>(
                 await _httpClient.GetAsync(
                     endpoint + GetQuerystring(queryParameters)
