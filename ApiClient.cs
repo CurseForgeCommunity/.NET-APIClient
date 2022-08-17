@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,7 +46,32 @@ namespace CurseForge.APIClient
             {
                 _httpClient.BaseAddress = new Uri(curseForgeApiBaseUrl);
 
-                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", $"CurseForge Api Client (PartnerId: {_partnerId}) (+{_contactEmail})");
+                var cfUserAgent = new StringBuilder();
+
+                cfUserAgent.Append("CurseForgeApiClient/" + Assembly.GetExecutingAssembly().GetName().Version);
+
+                if (_partnerId > 0 || !string.IsNullOrWhiteSpace(_contactEmail))
+                {
+                    cfUserAgent.Append(" (");
+                    if (_partnerId > 0)
+                    {
+                        cfUserAgent.Append(_partnerId);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(_contactEmail))
+                    {
+                        if (_partnerId > 0)
+                        {
+                            cfUserAgent.Append(";");
+                        }
+
+                        cfUserAgent.Append(_contactEmail);
+                    }
+
+                    cfUserAgent.Append(")");
+                }
+
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", cfUserAgent.ToString());
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", _apiKey);
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
             });
@@ -77,13 +103,15 @@ namespace CurseForge.APIClient
                 string.Join("&",
                     queryParameters
                         .Where(k => k.Value != null)
-                        .Select(k => $"{System.Net.WebUtility.UrlEncode(k.Key)}={System.Net.WebUtility.UrlEncode(k.Value.ToString())}")) : "";
+                        .Select(k => $"{System.Net.WebUtility.UrlEncode(k.Key)}={System.Net.WebUtility.UrlEncode(k.Value.ToString())}")) : string.Empty;
         }
 
         internal async Task<T> GET<T>(string endpoint, params (string Key, object Value)[] queryParameters)
         {
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
+
+            Console.WriteLine(_httpClient.DefaultRequestHeaders.UserAgent);
             return await HandleResponseMessage<T>(
                 await _httpClient.GetAsync(
                     endpoint + GetQuerystring(queryParameters)
