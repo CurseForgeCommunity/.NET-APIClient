@@ -8,6 +8,6 @@ namespace CurseForge.APIClient.Models.Games
         public string GameVersionPadded { get; set; }
         public string GameVersion { get; set; }
         public DateTimeOffset GameVersionReleaseDate { get; set; }
-        public uint? GameVersionTypeId { get; set; }
+        public int? GameVersionTypeId { get; set; }
     }
 }

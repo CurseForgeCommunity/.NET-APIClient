@@ -2,9 +2,9 @@
 {
     public class Pagination
     {
-        public uint Index { get; set; }
-        public uint PageSize { get; set; }
-        public uint ResultCount { get; set; }
-        public uint TotalCount { get; set; }
+        public int Index { get; set; }
+        public int PageSize { get; set; }
+        public int ResultCount { get; set; }
+        public long TotalCount { get; set; }
     }
 }

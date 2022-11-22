@@ -2,8 +2,8 @@
 {
     public class GameVersionType
     {
-        public uint Id { get; set; }
-        public uint GameId { get; set; }
+        public int Id { get; set; }
+        public int GameId { get; set; }
         public string Name { get; set; }
         public string Slug { get; set; }
     }
