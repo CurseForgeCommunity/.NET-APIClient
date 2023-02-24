@@ -17,19 +17,12 @@ namespace CurseForge.APIClient
         private const string curseForgeApiBaseUrl = "https://api.curseforge.com";
 
         private readonly string _apiKey;
-        private readonly long _partnerId;
-        private readonly string _contactEmail;
 
         private void InitHttpClientIfMissing()
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
             {
                 throw new MissingApiKeyException("You need to provide an API key to be able to call the API");
-            }
-
-            if (string.IsNullOrWhiteSpace(_contactEmail))
-            {
-                throw new MissingContactEmailException("You need to provide an email to be contacted on, if needed.");
             }
 
             BootstrapDependencyInjection();
@@ -46,32 +39,7 @@ namespace CurseForge.APIClient
             {
                 _httpClient.BaseAddress = new Uri(curseForgeApiBaseUrl);
 
-                var cfUserAgent = new StringBuilder();
-
-                cfUserAgent.Append("CurseForgeApiClient/" + Assembly.GetExecutingAssembly().GetName().Version);
-
-                if (_partnerId > 0 || !string.IsNullOrWhiteSpace(_contactEmail))
-                {
-                    cfUserAgent.Append(" (");
-                    if (_partnerId > 0)
-                    {
-                        cfUserAgent.Append(_partnerId);
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(_contactEmail))
-                    {
-                        if (_partnerId > 0)
-                        {
-                            cfUserAgent.Append(";");
-                        }
-
-                        cfUserAgent.Append(_contactEmail);
-                    }
-
-                    cfUserAgent.Append(")");
-                }
-
-                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", cfUserAgent.ToString());
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", $"CuresForge-Community-NET-APIClient/{Assembly.GetExecutingAssembly().GetName().Version.ToString()}");
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", _apiKey);
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
             });
@@ -79,20 +47,15 @@ namespace CurseForge.APIClient
             _serviceProvider = _serviceCollection.BuildServiceProvider();
         }
 
-        public ApiClient(string apiKey, long partnerId, string contactEmail)
+        [Obsolete]
+        public ApiClient(string apiKey, long partnerId, string contactEmail) => new ApiClient(apiKey);
+
+        [Obsolete]
+        public ApiClient(string apiKey, string contactEmail) => new ApiClient(apiKey);
+
+        public ApiClient(string apiKey)
         {
             _apiKey = apiKey;
-            _partnerId = partnerId;
-            _contactEmail = contactEmail;
-
-            InitHttpClientIfMissing();
-        }
-
-        public ApiClient(string apiKey, string contactEmail)
-        {
-            _apiKey = apiKey;
-            _partnerId = -1;
-            _contactEmail = contactEmail;
 
             InitHttpClientIfMissing();
         }
@@ -140,6 +103,7 @@ namespace CurseForge.APIClient
             return JsonConvert.DeserializeObject<T>(await result.Content.ReadAsStringAsync());
         }
 
+        [Obsolete]
         public void Dispose()
         {
             // Empty because of legacy
