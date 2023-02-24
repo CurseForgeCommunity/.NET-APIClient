@@ -15,7 +15,7 @@ All you need is an API key, your partner ID and a contact email to get started.
 Please make note that the ApiClient inheirits of `IDisposable`, so that you dispose of it when you're done with it.
 
 ```csharp
-var cfApiClient = new CurseForge.APIClient.ApiClient(apiKey, partnerId, contactEmail);
+var cfApiClient = new CurseForge.APIClient.ApiClient(apiKey);
 ```
 
 ## How to call the API with the client
