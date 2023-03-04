@@ -20,16 +20,36 @@ namespace CurseForge.APIClient
         private readonly long _partnerId;
         private readonly string _contactEmail;
 
+        public ApiClient(string apiKey, long partnerId, string contactEmail)
+        {
+            _apiKey = apiKey;
+            _partnerId = partnerId;
+            _contactEmail = contactEmail;
+
+            InitHttpClientIfMissing();
+        }
+
+        public ApiClient(string apiKey, string contactEmail)
+        {
+            _apiKey = apiKey;
+            _partnerId = -1;
+            _contactEmail = contactEmail;
+
+            InitHttpClientIfMissing();
+        }
+
+        public ApiClient(string apiKey)
+        {
+            _apiKey = apiKey;
+
+            InitHttpClientIfMissing();
+        }
+
         private void InitHttpClientIfMissing()
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
             {
                 throw new MissingApiKeyException("You need to provide an API key to be able to call the API");
-            }
-
-            if (string.IsNullOrWhiteSpace(_contactEmail))
-            {
-                throw new MissingContactEmailException("You need to provide an email to be contacted on, if needed.");
             }
 
             BootstrapDependencyInjection();
@@ -77,24 +97,6 @@ namespace CurseForge.APIClient
             });
 
             _serviceProvider = _serviceCollection.BuildServiceProvider();
-        }
-
-        public ApiClient(string apiKey, long partnerId, string contactEmail)
-        {
-            _apiKey = apiKey;
-            _partnerId = partnerId;
-            _contactEmail = contactEmail;
-
-            InitHttpClientIfMissing();
-        }
-
-        public ApiClient(string apiKey, string contactEmail)
-        {
-            _apiKey = apiKey;
-            _partnerId = -1;
-            _contactEmail = contactEmail;
-
-            InitHttpClientIfMissing();
         }
 
         internal string GetQuerystring(params (string Key, object Value)[] queryParameters)
