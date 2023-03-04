@@ -15,6 +15,8 @@ All you need is an API key, your partner ID and a contact email to get started.
 Please make note that the ApiClient inheirits of `IDisposable`, so that you dispose of it when you're done with it.
 
 ```csharp
+var cfApiClient = new CurseForge.APIClient.ApiClient(apiKey);
+var cfApiClient = new CurseForge.APIClient.ApiClient(apiKey, contactEmail);
 var cfApiClient = new CurseForge.APIClient.ApiClient(apiKey, partnerId, contactEmail);
 ```
 
@@ -74,7 +76,7 @@ var gameVersionTypes = await cfApiClient.GetGameVersionTypesAsync(gameId);
 
 Get all available classes and categories of the specified game. Specify a game id for a list of all game categories, or a class id for a list of categories under that class.
 
-`GetCategoriesAsync(int? gameId = null, int? classId = null)`
+`GetCategoriesAsync(int? gameId = null, int? classId = null, bool? classesOnly = null)`
 
 Requires either `gameId` or `classId` for the method to work.
 
@@ -170,7 +172,11 @@ var modFile = await cfApiClient.GetModFileAsync(modId, fileId);
 
 Get all files of the specified mod.
 
-`GetModFilesAsync(int modId)`
+```csharp
+GetModFilesAsync(int modId, string gameVersion = null,
+    ModLoaderType? modLoaderType = null, string gameVersionFlavor = null,
+    int? index = null, int? pageSize = null)
+```
 
 ```csharp
 var modFiles = await cfApiClient.GetModFilesAsync(modId);
@@ -224,6 +230,14 @@ var modFile = await cfApiClient.GetFingerprintMatchesAsync(new GetFingerprintMat
 });
 ```
 
+#### Get Fingerprints Matches By GameId
+
+`GetFingerprintByGameIdMatchesAsync(int gameId, GetFingerprintMatchesRequestBody body)`
+
+```csharp
+var matches = await cfApiClient.GetFingerprintByGameIdMatchesAsync(gameId, body);
+```
+
 #### Get Fingerprints Fuzzy Matches
 
 Get mod files that match a list of fingerprints using fuzzy matching.
@@ -232,6 +246,24 @@ Get mod files that match a list of fingerprints using fuzzy matching.
 
 ```csharp
 var modFile = await cfApiClient.GetFingerprintsFuzzyMatchesAsync(new GetFuzzyMatchesRequestBody {
+    GameId = gameId,
+    Fingerprints = new List<FolderFingerprint> { 
+        new FolderFingerprint {
+            Foldername = folderName,
+            Fingerprints = new List<long> { fingerprint }
+        }
+    }
+});
+```
+
+#### Get Fingerprints Fuzzy Matches By GameId
+
+Get mod files that match a list of fingerprints using fuzzy matching.
+
+`GetFingerprintsFuzzyMatchesAsync(int gameId, GetFuzzyMatchesRequestBody body)`
+
+```csharp
+var modFile = await cfApiClient.GetFingerprintsFuzzyMatchesAsync(gameId, new GetFuzzyMatchesRequestBody {
     GameId = gameId,
     Fingerprints = new List<FolderFingerprint> { 
         new FolderFingerprint {

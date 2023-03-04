@@ -4,9 +4,9 @@
 		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
 		<Authors>itssimple / NoLifeKing85</Authors>
 		<Company />
-		<Description>A .NET client for connecting to the CurseForge API</Description>
-		<Copyright>2021-2022 © NoLifeKing85</Copyright>
-		<Version>2.0.1</Version>
+		<Description>A .NET client for connecting to the CurseForge / Eternal API</Description>
+		<Copyright>2021-2023 © NoLifeKing85</Copyright>
+		<Version>2.1.0</Version>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -17,7 +17,7 @@
 		<PublishSingleFile>true</PublishSingleFile>
 		<PublishTrimmed>true</PublishTrimmed>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/itssimple/CurseForge.APIClient</RepositoryUrl>
+		<RepositoryUrl>https://github.com/CurseForgeCommunity/.NET-APIClient</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>curseforge;cfcore</PackageTags>
@@ -42,6 +42,7 @@
 	<PropertyGroup>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 		<PackageProjectUrl>https://github.com/CurseForgeCommunity/.NET-APIClient</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
