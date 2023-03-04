@@ -1,5 +1,6 @@
 ﻿using CurseForge.APIClient.Models;
 using CurseForge.APIClient.Models.Files;
+using CurseForge.APIClient.Models.Mods;
 using System.Threading.Tasks;
 
 namespace CurseForge.APIClient
@@ -11,10 +12,16 @@ namespace CurseForge.APIClient
             return await GET<GenericResponse<File>>($"/v1/mods/{modId}/files/{fileId}");
         }
 
-        public async Task<GenericListResponse<File>> GetModFilesAsync(int modId, string gameVersionFlavor = null, int? index = null, int? pageSize = null)
+        public async Task<GenericListResponse<File>> GetModFilesAsync(int modId, string gameVersion = null,
+            ModLoaderType? modLoaderType = null, string gameVersionFlavor = null,
+            int? index = null, int? pageSize = null)
         {
             return await GET<GenericListResponse<File>>($"/v1/mods/{modId}/files",
-                ("gameVersionFlavor", gameVersionFlavor), ("index", index), ("pageSize", pageSize)
+                ("gameVersion", gameVersion),
+                ("modLoaderType", modLoaderType),
+                ("gameVersionFlavor", gameVersionFlavor),
+                ("index", index),
+                ("pageSize", pageSize)
             );
         }
 

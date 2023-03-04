@@ -11,9 +11,19 @@ namespace CurseForge.APIClient
             ModLoaderType? modLoaderType = null, string slug = null, int? gameVersionTypeId = null, int? index = null, int? pageSize = null)
         {
             return await GET<GenericListResponse<Mod>>("/v1/mods/search",
-                ("gameId", gameId), ("classId", classId), ("categoryId", categoryId), ("gameVersion", gameVersion), ("searchFilter", searchFilter),
-                ("slug", slug), ("sortField", sortField), ("sortOrder", sortOrder == ModsSearchSortOrder.Descending ? "desc" : "asc"), ("modLoaderType", modLoaderType), ("gameVersionTypeId", gameVersionTypeId),
-                ("index", index), ("pageSize", pageSize));
+                ("gameId", gameId),
+                ("classId", classId),
+                ("categoryId", categoryId),
+                ("gameVersion", gameVersion),
+                ("searchFilter", searchFilter),
+                ("slug", slug),
+                ("sortField", sortField),
+                ("sortOrder", sortOrder == ModsSearchSortOrder.Descending ? "desc" : "asc"),
+                ("modLoaderType", modLoaderType),
+                ("gameVersionTypeId", gameVersionTypeId),
+                ("index", index),
+                ("pageSize", pageSize)
+            );
         }
 
         public async Task<GenericResponse<Mod>> GetModAsync(int modId)
