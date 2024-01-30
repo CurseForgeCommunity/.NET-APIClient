@@ -8,25 +8,17 @@ namespace CurseForge.APIClient
 {
     public partial class ApiClient
     {
-        public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintByGameIdMatchesAsync(int gameId, GetFingerprintMatchesRequestBody body)
-        {
-            return await POST<GenericResponse<FingerprintMatchesResult>>($"/v1/fingerprints/{gameId}", body);
-        }
+        public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintByGameIdMatchesAsync(int gameId, GetFingerprintMatchesRequestBody body) =>
+            await POST<GenericResponse<FingerprintMatchesResult>>($"/v1/fingerprints/{gameId}", body);
 
-        public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintMatchesAsync(GetFingerprintMatchesRequestBody body)
-        {
-            return await POST<GenericResponse<FingerprintMatchesResult>>("/v1/fingerprints", body);
-        }
+        public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintMatchesAsync(GetFingerprintMatchesRequestBody body) =>
+            await POST<GenericResponse<FingerprintMatchesResult>>("/v1/fingerprints", body);
 
-        public async Task<GenericResponse<FingerprintFuzzyMatchResult>> GetFingerprintsFuzzyMatchesByGameIdAsync(int gameId, GetFuzzyMatchesRequestBody body)
-        {
-            return await POST<GenericResponse<FingerprintFuzzyMatchResult>>($"/v1/fingerprints/fuzzy/{gameId}", body);
-        }
+        public async Task<GenericResponse<FingerprintFuzzyMatchResult>> GetFingerprintsFuzzyMatchesByGameIdAsync(int gameId, GetFuzzyMatchesRequestBody body) =>
+            await POST<GenericResponse<FingerprintFuzzyMatchResult>>($"/v1/fingerprints/fuzzy/{gameId}", body);
 
-        public async Task<GenericResponse<FingerprintFuzzyMatchResult>> GetFingerprintsFuzzyMatchesAsync(GetFuzzyMatchesRequestBody body)
-        {
-            return await POST<GenericResponse<FingerprintFuzzyMatchResult>>("/v1/fingerprints/fuzzy", body);
-        }
+        public async Task<GenericResponse<FingerprintFuzzyMatchResult>> GetFingerprintsFuzzyMatchesAsync(GetFuzzyMatchesRequestBody body) =>
+            await POST<GenericResponse<FingerprintFuzzyMatchResult>>("/v1/fingerprints/fuzzy", body);
 
         public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintMatchesForFileByGameIdAsync(int gameId, string file)
         {

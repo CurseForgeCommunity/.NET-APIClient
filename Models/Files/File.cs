@@ -19,6 +19,7 @@ namespace CurseForge.APIClient.Models.Files
         public List<FileHash> Hashes { get; set; } = new List<FileHash>();
         public DateTimeOffset FileDate { get; set; }
         public long FileLength { get; set; }
+        public long? FileSizeOnDisk { get; set; }
         public long DownloadCount { get; set; }
         public string DownloadUrl { get; set; }
         public List<string> GameVersions { get; set; } = new List<string>();
@@ -29,6 +30,8 @@ namespace CurseForge.APIClient.Models.Files
         public int? AlternateFileId { get; set; }
         public bool? IsServerPack { get; set; }
         public int? ServerPackFileId { get; set; }
+        public bool? IsEarlyAccessContent { get; set; }
+        public DateTimeOffset? EarlyAccessEndDate { get; set; }
         public long FileFingerprint { get; set; }
         public List<FileModule> Modules { get; set; } = new List<FileModule>();
     }

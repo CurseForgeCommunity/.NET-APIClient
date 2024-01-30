@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
 		<Authors>itssimple / NoLifeKing85</Authors>
 		<Company />
 		<Description>A .NET client for connecting to the CurseForge / Eternal API</Description>
-		<Copyright>2021-2023 © NoLifeKing85</Copyright>
-		<Version>2.1.0</Version>
+		<Copyright>2021-2024 © NoLifeKing85</Copyright>
+		<Version>2.2.0</Version>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -15,7 +15,6 @@
 
 	<PropertyGroup>
 		<PublishSingleFile>true</PublishSingleFile>
-		<PublishTrimmed>true</PublishTrimmed>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/CurseForgeCommunity/.NET-APIClient</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>

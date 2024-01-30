@@ -5,13 +5,11 @@ namespace CurseForge.APIClient
 {
     public partial class ApiClient
     {
-        public async Task<GenericListResponse<Category>> GetCategoriesAsync(int? gameId = null, int? classId = null, bool? classesOnly = null)
-        {
-            return await GET<GenericListResponse<Category>>("/v1/categories",
+        public async Task<GenericListResponse<Category>> GetCategoriesAsync(int? gameId = null, int? classId = null, bool? classesOnly = null) =>
+            await GET<GenericListResponse<Category>>("/v1/categories",
                 ("gameId", gameId),
                 ("classId", classId),
                 ("classesOnly", classesOnly)
             );
-        }
     }
 }

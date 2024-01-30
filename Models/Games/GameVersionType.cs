@@ -6,5 +6,7 @@
         public int GameId { get; set; }
         public string Name { get; set; }
         public string Slug { get; set; }
+        public bool IsSyncable { get; set; }
+        public GameVersionTypeStatus Status { get; set; }
     }
 }
