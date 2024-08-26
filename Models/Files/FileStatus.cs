@@ -16,6 +16,7 @@
         Deprecated = 12,
         Baking = 13,
         AwaitingPublishing = 14,
-        FailedPublishing = 15
+        FailedPublishing = 15,
+        Cooking = 16
     }
 }

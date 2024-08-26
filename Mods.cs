@@ -26,7 +26,7 @@ namespace CurseForge.APIClient
             int? index = null,
             int? pageSize = null
         ) =>
-            await GET<GenericListResponse<Mod>>("/v1/mods/search",
+            await GetList<Mod>("/v1/mods/search",
                 ("gameId", gameId),
                 ("classId", classId),
                 ("categoryId", categoryId),
@@ -47,15 +47,15 @@ namespace CurseForge.APIClient
             );
 
         public async Task<GenericResponse<Mod>> GetModAsync(int modId) =>
-            await GET<GenericResponse<Mod>>($"/v1/mods/{modId}");
+            await GetItem<Mod>($"/v1/mods/{modId}");
 
         public async Task<GenericResponse<string>> GetModDescriptionAsync(int modId) =>
-            await GET<GenericResponse<string>>($"/v1/mods/{modId}/description");
+            await GetItem<string>($"/v1/mods/{modId}/description");
 
         public async Task<GenericListResponse<Mod>> GetModsByIdListAsync(GetModsByIdsListRequestBody body) =>
-            await POST<GenericListResponse<Mod>>("/v1/mods", body);
+            await PostList<Mod>("/v1/mods", body);
 
         public async Task<GenericResponse<FeaturedModsResponse>> GetFeaturedModsAsync(GetFeaturedModsRequestBody body) =>
-            await POST<GenericResponse<FeaturedModsResponse>>("/v1/mods/featured", body);
+            await PostItem<FeaturedModsResponse>("/v1/mods/featured", body);
     }
 }

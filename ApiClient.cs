@@ -1,11 +1,13 @@
 ﻿using CurseForge.APIClient.Exceptions;
+using CurseForge.APIClient.Models;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CurseForge.APIClient
@@ -108,7 +110,19 @@ namespace CurseForge.APIClient
                         .Select(k => $"{System.Net.WebUtility.UrlEncode(k.Key)}={System.Net.WebUtility.UrlEncode(k.Value.ToString())}")) : string.Empty;
         }
 
-        internal async Task<T> GET<T>(string endpoint, params (string Key, object Value)[] queryParameters)
+        internal async Task<GenericListResponse<T>> GetList<T>(string endpoint, params (string Key, object Value)[] queryParameters)
+        {
+            var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
+            var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
+
+            return await HandleListResponseMessage<T>(
+                await _httpClient.GetAsync(
+                    endpoint + GetQuerystring(queryParameters)
+                )
+            );
+        }
+        
+        internal async Task<GenericResponse<T>> GetItem<T>(string endpoint, params (string Key, object Value)[] queryParameters)
         {
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
@@ -120,26 +134,78 @@ namespace CurseForge.APIClient
             );
         }
 
-        internal async Task<T> POST<T>(string endpoint, object body)
+        internal async Task<GenericListResponse<T>> PostList<T>(string endpoint, object body)
+        {
+            var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
+            var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
+            return await HandleListResponseMessage<T>(
+                await _httpClient.PostAsync(
+                    endpoint,
+                    new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json")
+                )
+            );
+        }
+        
+        internal async Task<GenericResponse<T>> PostItem<T>(string endpoint, object body)
         {
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
             return await HandleResponseMessage<T>(
                 await _httpClient.PostAsync(
                     endpoint,
-                    new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                    new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json")
                 )
             );
         }
-
-        internal async Task<T> HandleResponseMessage<T>(HttpResponseMessage result)
+        
+        internal static async Task<GenericListResponse<T>> HandleListResponseMessage<T>(HttpResponseMessage result)
         {
             if (!result.IsSuccessStatusCode)
             {
-                throw new Exception(await result.Content.ReadAsStringAsync());
+                var errorMessage = await result.Content.ReadAsStringAsync();
+                return new GenericListResponse<T>
+                {
+                    Error = new ErrorResponse
+                    {
+                        ErrorCode = (int)result.StatusCode,
+                        ErrorMessage = errorMessage
+                    }
+                };
             }
 
-            return JsonConvert.DeserializeObject<T>(await result.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<GenericListResponse<T>>(await result.Content.ReadAsStringAsync());
+        }
+
+        internal static async Task<GenericResponse<T>> HandleResponseMessage<T>(HttpResponseMessage result)
+        {
+            if (!result.IsSuccessStatusCode)
+            {
+                var errorMessage = await result.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    var type = typeof(T).Name;
+                    switch (result.StatusCode)
+                    {
+                        case HttpStatusCode.NotFound:
+                        {
+                            errorMessage = $"Could not find the {type}";
+                            break;
+                        }
+                    }
+                }
+                
+                return new GenericResponse<T>
+                {
+                    Error = new ErrorResponse
+                    {
+                        ErrorCode = (int)result.StatusCode,
+                        ErrorMessage = errorMessage
+                    }
+                };
+            }
+
+            return JsonSerializer.Deserialize<GenericResponse<T>>(await result.Content.ReadAsStringAsync());
         }
 
         public void Dispose()

@@ -9,22 +9,22 @@ namespace CurseForge.APIClient
     public partial class ApiClient
     {
         public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintByGameIdMatchesAsync(int gameId, GetFingerprintMatchesRequestBody body) =>
-            await POST<GenericResponse<FingerprintMatchesResult>>($"/v1/fingerprints/{gameId}", body);
+            await PostItem<FingerprintMatchesResult>($"/v1/fingerprints/{gameId}", body);
 
         public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintMatchesAsync(GetFingerprintMatchesRequestBody body) =>
-            await POST<GenericResponse<FingerprintMatchesResult>>("/v1/fingerprints", body);
+            await PostItem<FingerprintMatchesResult>("/v1/fingerprints", body);
 
         public async Task<GenericResponse<FingerprintFuzzyMatchResult>> GetFingerprintsFuzzyMatchesByGameIdAsync(int gameId, GetFuzzyMatchesRequestBody body) =>
-            await POST<GenericResponse<FingerprintFuzzyMatchResult>>($"/v1/fingerprints/fuzzy/{gameId}", body);
+            await PostItem<FingerprintFuzzyMatchResult>($"/v1/fingerprints/fuzzy/{gameId}", body);
 
         public async Task<GenericResponse<FingerprintFuzzyMatchResult>> GetFingerprintsFuzzyMatchesAsync(GetFuzzyMatchesRequestBody body) =>
-            await POST<GenericResponse<FingerprintFuzzyMatchResult>>("/v1/fingerprints/fuzzy", body);
+            await PostItem<FingerprintFuzzyMatchResult>("/v1/fingerprints/fuzzy", body);
 
         public async Task<GenericResponse<FingerprintMatchesResult>> GetFingerprintMatchesForFileByGameIdAsync(int gameId, string file)
         {
             var fingerprint = GetFingerprintFromFile(file);
 
-            return await POST<GenericResponse<FingerprintMatchesResult>>($"/v1/fingerprints/{gameId}", new GetFingerprintMatchesRequestBody
+            return await PostItem<FingerprintMatchesResult>($"/v1/fingerprints/{gameId}", new GetFingerprintMatchesRequestBody
             {
                 Fingerprints = new List<long> { fingerprint }
             });
@@ -34,7 +34,7 @@ namespace CurseForge.APIClient
         {
             var fingerprint = GetFingerprintFromFile(file);
 
-            return await POST<GenericResponse<FingerprintMatchesResult>>("/v1/fingerprints", new GetFingerprintMatchesRequestBody
+            return await PostItem<FingerprintMatchesResult>("/v1/fingerprints", new GetFingerprintMatchesRequestBody
             {
                 Fingerprints = new List<long> { fingerprint }
             });

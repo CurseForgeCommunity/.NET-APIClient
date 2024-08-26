@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Fingerprints
 {
     public class GetFingerprintMatchesRequestBody
     {
-        public List<long> Fingerprints {  get; set;} = new List<long>();
+        [JsonPropertyName("fingerprints")]
+        public List<long> Fingerprints { get; set;} = new List<long>();
     }
 }
