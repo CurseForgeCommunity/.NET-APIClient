@@ -21,6 +21,10 @@ namespace CurseForge.APIClient
         private readonly string _apiKey;
         private readonly long _partnerId;
         private readonly string _contactEmail;
+        /// <summary>
+        /// The delay between requests to the API, to help combat getting banned by the API.
+        /// </summary>
+        public TimeSpan RequestDelay { get; set; } = TimeSpan.Zero;
 
         public ApiClient(string apiKey, long partnerId, string contactEmail)
         {
@@ -158,8 +162,13 @@ namespace CurseForge.APIClient
             );
         }
         
-        internal static async Task<GenericListResponse<T>> HandleListResponseMessage<T>(HttpResponseMessage result)
+        internal async Task<GenericListResponse<T>> HandleListResponseMessage<T>(HttpResponseMessage result)
         {
+            if (RequestDelay > TimeSpan.Zero)
+            {
+                await Task.Delay(RequestDelay);
+            }
+
             if (!result.IsSuccessStatusCode)
             {
                 var errorMessage = await result.Content.ReadAsStringAsync();
@@ -176,8 +185,13 @@ namespace CurseForge.APIClient
             return JsonSerializer.Deserialize<GenericListResponse<T>>(await result.Content.ReadAsStringAsync());
         }
 
-        internal static async Task<GenericResponse<T>> HandleResponseMessage<T>(HttpResponseMessage result)
+        internal async Task<GenericResponse<T>> HandleResponseMessage<T>(HttpResponseMessage result)
         {
+            if (RequestDelay > TimeSpan.Zero)
+            {
+                await Task.Delay(RequestDelay);
+            }
+
             if (!result.IsSuccessStatusCode)
             {
                 var errorMessage = await result.Content.ReadAsStringAsync();
