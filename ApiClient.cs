@@ -198,6 +198,8 @@ namespace CurseForge.APIClient
             {
                 Console.WriteLine($"[RESPONSE] Code: {result.StatusCode}");
                 Console.WriteLine(JsonSerializer.Serialize(result));
+                var content = await result.Content.ReadAsStringAsync();
+                Console.WriteLine(content);
             }
 
             if (!result.IsSuccessStatusCode)
@@ -227,6 +229,8 @@ namespace CurseForge.APIClient
             {
                 Console.WriteLine($"[RESPONSE] Code: {result.StatusCode}");
                 Console.WriteLine(JsonSerializer.Serialize(result));
+                var content = await result.Content.ReadAsStringAsync();
+                Console.WriteLine(content);
             }
 
             if (!result.IsSuccessStatusCode)
