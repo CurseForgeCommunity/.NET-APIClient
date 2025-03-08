@@ -26,6 +26,8 @@ namespace CurseForge.APIClient
         /// </summary>
         public TimeSpan RequestDelay { get; set; } = TimeSpan.Zero;
 
+        public bool DebugOutput { get; set; } = false;
+
         public ApiClient(string apiKey, long partnerId, string contactEmail)
         {
             _apiKey = apiKey;
@@ -119,6 +121,11 @@ namespace CurseForge.APIClient
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
 
+            if(DebugOutput)
+            {
+                Console.WriteLine($"[GET] Calling {endpoint + GetQuerystring(queryParameters)}");
+            }
+
             return await HandleListResponseMessage<T>(
                 await _httpClient.GetAsync(
                     endpoint + GetQuerystring(queryParameters)
@@ -131,6 +138,11 @@ namespace CurseForge.APIClient
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
 
+            if (DebugOutput)
+            {
+                Console.WriteLine($"[GET] Calling {endpoint + GetQuerystring(queryParameters)}");
+            }
+
             return await HandleResponseMessage<T>(
                 await _httpClient.GetAsync(
                     endpoint + GetQuerystring(queryParameters)
@@ -142,6 +154,12 @@ namespace CurseForge.APIClient
         {
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
+
+            if (DebugOutput) {
+                Console.WriteLine($"[POST] Calling {endpoint}");
+                Console.WriteLine(JsonSerializer.Serialize(body));
+            }
+
             return await HandleListResponseMessage<T>(
                 await _httpClient.PostAsync(
                     endpoint,
@@ -154,6 +172,13 @@ namespace CurseForge.APIClient
         {
             var _httpClientFactory = _serviceProvider.GetService<IHttpClientFactory>();
             var _httpClient = _httpClientFactory.CreateClient("curseForgeClient");
+
+            if (DebugOutput)
+            {
+                Console.WriteLine($"[POST] Calling {endpoint}");
+                Console.WriteLine(JsonSerializer.Serialize(body));
+            }
+
             return await HandleResponseMessage<T>(
                 await _httpClient.PostAsync(
                     endpoint,
@@ -167,6 +192,12 @@ namespace CurseForge.APIClient
             if (RequestDelay > TimeSpan.Zero)
             {
                 await Task.Delay(RequestDelay);
+            }
+
+            if(DebugOutput)
+            {
+                Console.WriteLine($"[RESPONSE] Code: {result.StatusCode}");
+                Console.WriteLine(JsonSerializer.Serialize(result));
             }
 
             if (!result.IsSuccessStatusCode)
@@ -190,6 +221,12 @@ namespace CurseForge.APIClient
             if (RequestDelay > TimeSpan.Zero)
             {
                 await Task.Delay(RequestDelay);
+            }
+
+            if (DebugOutput)
+            {
+                Console.WriteLine($"[RESPONSE] Code: {result.StatusCode}");
+                Console.WriteLine(JsonSerializer.Serialize(result));
             }
 
             if (!result.IsSuccessStatusCode)
