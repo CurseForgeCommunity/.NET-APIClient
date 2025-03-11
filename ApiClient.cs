@@ -26,6 +26,8 @@ namespace CurseForge.APIClient
         /// </summary>
         public TimeSpan RequestDelay { get; set; } = TimeSpan.Zero;
 
+        public TimeSpan RequestTimeout { get; set; } = TimeSpan.FromSeconds(5);
+
         public bool DebugOutput { get; set; } = false;
 
         public ApiClient(string apiKey, long partnerId, string contactEmail)
@@ -102,6 +104,8 @@ namespace CurseForge.APIClient
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", cfUserAgent.ToString());
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", _apiKey);
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
+
+                _httpClient.Timeout = RequestTimeout;
             });
 
             _serviceProvider = _serviceCollection.BuildServiceProvider();

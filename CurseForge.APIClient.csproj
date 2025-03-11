@@ -6,7 +6,7 @@
 		<Company />
 		<Description>A .NET client for connecting to the CurseForge / Eternal API</Description>
 		<Copyright>2021-2025 © NoLifeKing85</Copyright>
-		<Version>4.1.1</Version>
+		<Version>4.2.0</Version>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
