@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Files
 {
-    public class File
+    public class File : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

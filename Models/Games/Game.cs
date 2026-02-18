@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Games
 {
-    public class Game
+    public class Game : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

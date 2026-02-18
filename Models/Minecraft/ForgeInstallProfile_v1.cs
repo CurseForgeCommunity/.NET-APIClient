@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace CurseForge.APIClient.Models.Minecraft
 {
-    public class ForgeInstallProfile_v1
+    public class ForgeInstallProfile_v1 : UnmappedCatcher
     {
         public ForgeInstallProfileInstall Install { get; set; }
         public ForgeInstallProfileVersionInfo VersionInfo { get; set; }
 
-        public class ForgeInstallProfileInstall
+        public class ForgeInstallProfileInstall : UnmappedCatcher
         {
             public string ProfileName { get; set; }
             public string Target { get; set; }
@@ -22,7 +22,7 @@ namespace CurseForge.APIClient.Models.Minecraft
             public string ModList { get; set; }
         }
 
-        public class ForgeInstallProfileVersionInfo
+        public class ForgeInstallProfileVersionInfo : UnmappedCatcher
         {
             public string Id { get; set; }
             public DateTimeOffset Time { get; set; }
@@ -34,7 +34,7 @@ namespace CurseForge.APIClient.Models.Minecraft
             public int MinimumLauncherVersion { get; set; }
         }
 
-        public class ModloaderLibrary
+        public class ModloaderLibrary : UnmappedCatcher
         {
             public string Name { get; set; }
             public string Url { get; set; }

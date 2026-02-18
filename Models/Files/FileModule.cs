@@ -2,7 +2,7 @@
 
 namespace CurseForge.APIClient.Models.Files
 {
-    public class FileModule
+    public class FileModule : UnmappedCatcher
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }

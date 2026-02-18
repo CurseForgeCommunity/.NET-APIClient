@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Minecraft
 {
-    public class MinecraftModloaderInfoListItem
+    public class MinecraftModloaderInfoListItem : UnmappedCatcher
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }

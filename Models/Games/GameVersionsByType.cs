@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Games
 {
-    public class GameVersionsByType
+    public class GameVersionsByType : UnmappedCatcher
     {
         [JsonPropertyName("type")]
         public int Type { get; set; }

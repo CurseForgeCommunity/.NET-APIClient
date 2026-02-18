@@ -2,7 +2,7 @@
 
 namespace CurseForge.APIClient.Models.Games
 {
-    public class GameVersion
+    public class GameVersion : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

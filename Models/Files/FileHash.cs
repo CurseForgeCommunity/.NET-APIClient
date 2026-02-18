@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Files
 {
-    public class FileHash
+    public class FileHash : UnmappedCatcher
     {
         [JsonPropertyName("value")]
         public string Value { get; set; }

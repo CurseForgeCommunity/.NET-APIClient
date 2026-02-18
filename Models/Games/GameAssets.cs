@@ -2,7 +2,7 @@
 
 namespace CurseForge.APIClient.Models.Games
 {
-    public class GameAssets
+    public class GameAssets : UnmappedCatcher
     {
         [JsonPropertyName("iconUrl")]
         public string IconUrl { get; set;}

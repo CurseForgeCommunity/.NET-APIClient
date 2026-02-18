@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Fingerprints
 {
-    public class FingerprintFuzzyMatch
+    public class FingerprintFuzzyMatch : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

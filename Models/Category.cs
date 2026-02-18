@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models
 {
-    public class Category
+    public class Category : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

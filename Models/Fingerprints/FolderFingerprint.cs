@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Fingerprints
 {
-    public class FolderFingerprint
+    public class FolderFingerprint : UnmappedCatcher
     {
         [JsonPropertyName("foldername")]
         public string Foldername { get; set; }

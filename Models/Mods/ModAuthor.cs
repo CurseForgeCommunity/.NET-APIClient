@@ -2,7 +2,7 @@
 
 namespace CurseForge.APIClient.Models.Mods
 {
-    public class ModAuthor
+    public class ModAuthor : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CurseForge.APIClient.Models
 {
-    public class Pagination
+    public class Pagination : UnmappedCatcher
     {
         [JsonPropertyName("index")]
         public int Index { get; set; }

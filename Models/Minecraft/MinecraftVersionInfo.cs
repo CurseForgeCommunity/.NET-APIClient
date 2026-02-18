@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Minecraft
 {
-    public class MinecraftVersionInfo
+    public class MinecraftVersionInfo : UnmappedCatcher
     {
         [JsonPropertyName("id")]
         public uint Id { get; set; }

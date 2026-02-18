@@ -2,7 +2,7 @@
 
 namespace CurseForge.APIClient.Models.Mods
 {
-    public class ModLinks
+    public class ModLinks : UnmappedCatcher
     {
         [JsonPropertyName("websiteUrl")]
         public string WebsiteUrl {  get; set;}

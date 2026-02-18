@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Fingerprints
 {
-    public class FingerprintMatchesResult
+    public class FingerprintMatchesResult : UnmappedCatcher
     {
         [JsonPropertyName("isCacheBuilt")]
         public bool IsCacheBuilt { get; set; }

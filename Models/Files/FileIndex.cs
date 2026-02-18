@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CurseForge.APIClient.Models.Files
 {
-    public class FileIndex
+    public class FileIndex : UnmappedCatcher
     {
         [JsonPropertyName("gameVersion")]
         public string GameVersion { get; set; }
